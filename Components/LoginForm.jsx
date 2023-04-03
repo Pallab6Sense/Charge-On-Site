@@ -11,12 +11,14 @@ function LoginForm() {
           <div className="img">
             <img src="cosLogo3.png" alt="" />
           </div>
+
           <div className="description">
             <Title level={3}>Log IN</Title>
             <Text className="ant-text">
               Please Provide your login and password to access your portal
             </Text>
           </div>
+
           <div className="ant-form">
             <AntLogInForm />
           </div>
