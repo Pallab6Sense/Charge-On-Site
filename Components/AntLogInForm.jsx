@@ -1,8 +1,14 @@
 import React from 'react';
 import { Button, Input, Typography } from 'antd';
 const { Title, Text } = Typography;
+import { useRouter } from 'next/router';
 
 function AntLogInForm() {
+  const router = useRouter();
+  const redirect = () => {
+    router.push('/welcome');
+  };
+
   return (
     <form action="">
       <div className="email">
@@ -16,7 +22,9 @@ function AntLogInForm() {
       <div className="frgt-pass">
         <p>Forget Password?</p>
       </div>
-      <Button className="ant-btn">Log In</Button>
+      <Button className="ant-btn" onClick={redirect}>
+        Log In
+      </Button>
     </form>
   );
 }
