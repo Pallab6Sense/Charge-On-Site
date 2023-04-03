@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Input, Typography } from 'antd';
+import { Button, Form, Input, Typography } from 'antd';
 const { Text } = Typography;
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -19,8 +19,9 @@ function AntLogInForm() {
       ? router.push('/welcome')
       : null;
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onFinish = (e) => {
+    e.preventDefault;
+    console.log('onFinish');
     const credentials = {
       email,
       password,
@@ -31,41 +32,60 @@ function AntLogInForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div className="email">
-          <Text className="ant-txt">Email</Text>
+      <Form
+        name="basic"
+        labelCol={{
+          span: 24,
+        }}
+        wrapperCol={{
+          span: 24,
+        }}
+        onFinish={onFinish}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Username"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
           <Input
-            className="ant-input-box"
-            size="large"
-            placeholder="Email"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
           />
-        </div>
+        </Form.Item>
 
-        <div className="password">
-          <Text className="ant-txt">password</Text>
+        <Form.Item
+          label="Password"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
           <Input.Password
-            className="ant-input-box"
-            size="large"
-            placeholder="Password"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
-        </div>
+        </Form.Item>
+        <Form.Item>
+          <div className="frgt-pass">
+            <p style={{ color: 'rgb(6, 70, 6)' }}>Forget Password?</p>
+          </div>
+        </Form.Item>
 
-        <div className="frgt-pass">
-          <p>Forget Password?</p>
-        </div>
-
-        <Button className="ant-btn" onClick={handleClick} htmlType="submit">
-          Log In
-        </Button>
-      </form>
+        <Form.Item>
+          <Button className="ant-btn" htmlType="submit" onClick={handleClick}>
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
 }

@@ -47,9 +47,23 @@
   display: grid;
   justify-content: center;
   justify-items: center;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
   text-align: center;
+}
+
+:where(.css-dev-only-do-not-override-1e3x2xa).ant-form-item {
+  margin-bottom: 0px;
+}
+
+:where(.css-dev-only-do-not-override-1e3x2xa).ant-form-vertical .ant-form-item-label,
+:where(.css-dev-only-do-not-override-1e3x2xa).ant-col-24.ant-form-item-label,
+:where(.css-dev-only-do-not-override-1e3x2xa).ant-col-xl-24.ant-form-item-label {
+  padding-bottom: 5px;
+}
+
+:where(.css-dev-only-do-not-override-1e3x2xa).ant-input {
+  background-color: white;
 }
 
 .ant-text {
@@ -57,7 +71,7 @@
   font-size: clamp(16px, .5rem + 1vw, 18px);
 }
 
-.ant-txt{
+.ant-txt {
   font-size: 16px;
   font-weight: 500;
   color: rgb(131, 130, 130);
