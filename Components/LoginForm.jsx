@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { Button, Input, Typography } from 'antd';
+import { Spin, Typography } from 'antd';
 import AntLogInForm from './AntLogInForm';
+import { useSelector } from 'react-redux';
 const { Title, Text } = Typography;
 function LoginForm() {
+
   return (
     <>
       <div className="form-div">
+
         <div className="content">
           <div className="img">
             <img src="cosLogo3.png" alt="" />

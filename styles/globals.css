@@ -1,10 +1,10 @@
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-.container{
+
+.container {
   display: grid;
   max-width: 580px;
   margin: auto;
@@ -14,7 +14,7 @@
 }
 
 
-.form-div{
+.form-div {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -25,18 +25,22 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
-.content{
+
+.content {
   max-width: 350px;
   margin: auto;
 }
-.img{
+
+.img {
   display: flex;
   justify-content: center;
 }
-.img img{
+
+.img img {
   width: 80%;
 }
-.description{
+
+.description {
   display: grid;
   justify-content: center;
   justify-items: center;
@@ -44,46 +48,56 @@
   padding-top: 3rem;
   text-align: center;
 }
-.ant-text{
+
+.ant-text {
   color: rgb(11, 80, 11);
-  font-size: clamp(16px,.5rem + 1vw,18px);
+  font-size: clamp(16px, .5rem + 1vw, 18px);
 }
-.frgt-pass{
+
+.frgt-pass {
   color: rgb(11, 80, 11);
   display: flex;
   justify-content: flex-end;
+  padding-bottom: .8rem;
 }
-.ant-btn{
+
+.ant-btn {
   background-color: rgb(11, 80, 11);
   width: 100%;
   color: white;
 }
-.email{
+
+.password {
   padding-bottom: .8rem;
 }
-.password{
-  padding-bottom: .8rem;
-}
-.frgt-pass{
-  padding-bottom: .8rem;
-}
-.ant-btn:hover{
+
+
+.ant-btn:hover {
   cursor: pointer;
   color: white;
 }
 
-.frgt-pass:hover{
+.frgt-pass:hover {
   cursor: pointer;
 }
-.welcome-div{
+
+.welcome-div {
   display: flex;
   justify-content: center;
   max-width: fit-content;
   margin: 15rem auto;
 }
 
+.ant-notification {
+  /* background-color: #f2f2f2; */
+  color: red;
+  display: flex;
+  justify-content: space-between;
+  top: 100px;
+}
+
 @media screen and (max-width: 768px) {
-  .content{
+  .content {
     max-width: 350px;
     margin: 1rem;
   }
