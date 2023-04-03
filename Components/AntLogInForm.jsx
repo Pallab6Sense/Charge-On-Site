@@ -33,8 +33,9 @@ function AntLogInForm() {
     <>
       <form onSubmit={handleSubmit}>
         <div className="email">
-          <Text className='ant-txt'>Email</Text>
+          <Text className="ant-txt">Email</Text>
           <Input
+            className="ant-input-box"
             size="large"
             placeholder="Email"
             value={email}
@@ -45,8 +46,9 @@ function AntLogInForm() {
         </div>
 
         <div className="password">
-          <Text className='ant-txt'>password</Text>
-          <Input
+          <Text className="ant-txt">password</Text>
+          <Input.Password
+            className="ant-input-box"
             size="large"
             placeholder="Password"
             value={password}
@@ -63,7 +65,6 @@ function AntLogInForm() {
         <Button className="ant-btn" onClick={handleClick} htmlType="submit">
           Log In
         </Button>
-
       </form>
     </>
   );

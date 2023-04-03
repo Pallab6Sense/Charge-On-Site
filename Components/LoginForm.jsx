@@ -8,7 +8,6 @@ function LoginForm() {
   return (
     <>
       <div className="form-div">
-
         <div className="content">
           <div className="img">
             <img src="cosLogo3.png" alt="" />
