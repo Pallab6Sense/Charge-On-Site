@@ -1,4 +1,4 @@
-const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
+const { createSlice } = require('@reduxjs/toolkit');
 import { login } from './actions';
 
 const initialState = {

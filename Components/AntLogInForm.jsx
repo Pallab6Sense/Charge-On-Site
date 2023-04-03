@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Input, Typography, notification } from 'antd';
+import { useState } from 'react';
+import { Button, Input, Typography } from 'antd';
 const { Text } = Typography;
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '@/Redux/actions';
 
 function AntLogInForm() {
-  const [api, contextHolder] = notification.useNotification();
-
-  const openNotification = (placement) => {
-    api.info({
-      description: 'Please provide a valid email and password',
-      placement,
-      className: 'ant-notification',
-      closeIcon: '',
-    });
-  };
-
   const router = useRouter();
 
   const dispatch = useDispatch();
-  const userDetails = useSelector((state) => state.user.user);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +17,7 @@ function AntLogInForm() {
   const handleClick = () => {
     email === 'jo@email.com' && password === '2&57DyhUTH1c' && type === 'email'
       ? router.push('/welcome')
-      : openNotification('top');
+      : null;
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,15 +29,11 @@ function AntLogInForm() {
     dispatch(login(credentials));
   };
 
-  useEffect(() => {
-    console.log(userDetails);
-  }, [userDetails]);
-
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div className="email">
-          <Text>Email</Text>
+          <Text className='ant-txt'>Email</Text>
           <Input
             size="large"
             placeholder="Email"
@@ -61,7 +45,7 @@ function AntLogInForm() {
         </div>
 
         <div className="password">
-          <Text>password</Text>
+          <Text className='ant-txt'>password</Text>
           <Input
             size="large"
             placeholder="Password"
@@ -79,6 +63,7 @@ function AntLogInForm() {
         <Button className="ant-btn" onClick={handleClick} htmlType="submit">
           Log In
         </Button>
+
       </form>
     </>
   );

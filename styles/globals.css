@@ -54,6 +54,12 @@
   font-size: clamp(16px, .5rem + 1vw, 18px);
 }
 
+.ant-txt{
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(131, 130, 130);
+}
+
 .frgt-pass {
   color: rgb(6, 70, 6);
   display: flex;
@@ -75,6 +81,7 @@
 .ant-btn:hover {
   cursor: pointer;
   color: white;
+  background-color: rgb(16, 80, 16);
 }
 
 .frgt-pass:hover {
@@ -89,7 +96,6 @@
 }
 
 .ant-notification {
-  /* background-color: #f2f2f2; */
   color: red;
   display: flex;
   justify-content: space-between;

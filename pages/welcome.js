@@ -5,7 +5,7 @@ function welcome() {
   return (
     <>
       <div className="welcome-div">
-        <Title style={{ fontSize: '50px' }}>Welcome User</Title>
+        <Title style={{ fontSize: '55px',color:'blue' }}>Welcome User</Title>
       </div>
     </>
   );
