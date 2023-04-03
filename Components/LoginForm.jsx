@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { Spin, Typography } from 'antd';
+import {Typography } from 'antd';
 import AntLogInForm from './AntLogInForm';
-import { useSelector } from 'react-redux';
 const { Title, Text } = Typography;
 function LoginForm() {
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Input, Spin, Typography, notification } from 'antd';
+import { Button, Input, Typography, notification } from 'antd';
 const { Text } = Typography;
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';

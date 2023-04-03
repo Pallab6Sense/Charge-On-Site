@@ -21,7 +21,7 @@
   align-items: center;
   gap: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  border-top: 10px solid rgb(11, 80, 11);
+  border-top: 10px solid rgb(6, 70, 6);
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
@@ -50,19 +50,19 @@
 }
 
 .ant-text {
-  color: rgb(11, 80, 11);
+  color: rgb(6, 70, 6);
   font-size: clamp(16px, .5rem + 1vw, 18px);
 }
 
 .frgt-pass {
-  color: rgb(11, 80, 11);
+  color: rgb(6, 70, 6);
   display: flex;
   justify-content: flex-end;
   padding-bottom: .8rem;
 }
 
 .ant-btn {
-  background-color: rgb(11, 80, 11);
+  background-color: rgb(6, 70, 6);
   width: 100%;
   color: white;
 }
