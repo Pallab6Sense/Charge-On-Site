@@ -21,7 +21,6 @@ const AntLogInForm = () => {
   };
   const onFinish = (e) => {
     e.preventDefault;
-    console.log('onFinish');
     const credentials = {
       email,
       password,
