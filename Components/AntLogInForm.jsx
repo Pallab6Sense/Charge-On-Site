@@ -12,9 +12,12 @@ const AntLogInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const type = 'email';
+  const envEmail = process.env.envEmail;
+  const envPassword = process.env.envPassword;
+  const envType = process.env.envType;
 
   const handleClick = () => {
-    email === 'jo@email.com' && password === '2&57DyhUTH1c' && type === 'email'
+    email === envEmail && password === envPassword && type === envType
       ? router.push('/welcome')
       : null;
   };
