@@ -2,7 +2,7 @@ const { createSlice } = require('@reduxjs/toolkit');
 import { login } from './actions';
 
 const initialState = {
-  data: {},
+  data: null,
   loading: false,
   error: null,
 };
