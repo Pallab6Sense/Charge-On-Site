@@ -2,7 +2,7 @@ const { createSlice } = require('@reduxjs/toolkit');
 import { login } from './actions';
 
 const initialState = {
-  user: null,
+  data: {},
   loading: false,
   error: null,
 };
@@ -16,7 +16,7 @@ const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.data = action.payload;
         state.loading = false;
       })
       .addCase(login.rejected, (state, action) => {

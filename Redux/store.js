@@ -1,4 +1,4 @@
-import userSlice from './userSlice';
+import userSlice from './User/userSlice';
 
 const { configureStore } = require('@reduxjs/toolkit');
 

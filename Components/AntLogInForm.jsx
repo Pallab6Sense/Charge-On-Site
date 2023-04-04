@@ -3,9 +3,9 @@ import { Button, Form, Input, Typography } from 'antd';
 const { Text } = Typography;
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { login } from '@/Redux/actions';
+import { login } from '@/Redux/User/actions';
 
-function AntLogInForm() {
+const AntLogInForm = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -88,6 +88,6 @@ function AntLogInForm() {
       </Form>
     </>
   );
-}
+};
 
 export default AntLogInForm;

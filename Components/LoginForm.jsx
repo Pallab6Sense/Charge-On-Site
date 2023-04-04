@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import {Typography } from 'antd';
+import { Typography } from 'antd';
 import AntLogInForm from './AntLogInForm';
 const { Title, Text } = Typography;
-function LoginForm() {
 
+const LoginForm = () => {
   return (
     <>
       <div className="form-div">
@@ -27,6 +27,6 @@ function LoginForm() {
       </div>
     </>
   );
-}
+};
 
 export default LoginForm;
