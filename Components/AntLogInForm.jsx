@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Button, Form, Input, Typography } from 'antd';
-const { Text } = Typography;
+import { Button, Form, Input } from 'antd';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { login } from '@/Redux/User/actions';
