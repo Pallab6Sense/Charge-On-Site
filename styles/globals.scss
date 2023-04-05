@@ -109,10 +109,14 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
 }
 
 .welcome-div {
-  display: flex;
+  display: grid;
   justify-content: center;
-  max-width: fit-content;
+  grid-gap: 20px;
+  max-width: 520px;
   margin: 15rem auto;
+  justify-items: center;
+  padding-left: clamp(1rem, -0.25rem + 3.333vw, 2.75rem);
+  padding-right: clamp(1rem, -0.25rem + 3.333vw, 2.75rem);
 }
 
 .ant-notification {

@@ -3,7 +3,6 @@ import { Button, Form, Input } from 'antd';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/Redux/User/actions';
-import { wrapper } from '@/Redux/store';
 import Cookies from 'js-cookie';
 
 const AntLogInForm = () => {
@@ -40,10 +39,10 @@ const AntLogInForm = () => {
     expires: 7,
   });
 
-   console.log("----e--e-e-e",accessToken);
+  //  console.log("----e--e-e-e",accessToken);
 
   // const accessTokenCookie=Cookies.get("AccessToken")
-  console.log("Get AccessToken from cookie",Cookies.get("AccessToken"));
+  // console.log("Get AccessToken from cookie",Cookies.get("AccessToken"));
 
 
   return (
