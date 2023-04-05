@@ -25,6 +25,12 @@ function welcome() {
     setAccessToken(state?.reducer?.user?.data?.accessToken);
   }, [state]);
 
+  useEffect(()=>{
+    Cookies.set('AccessToken', accessToken, {
+      expires: 7,
+    });
+  },[accessToken])
+
   Cookies.set('AccessToken', accessToken, {
     expires: 7,
   });

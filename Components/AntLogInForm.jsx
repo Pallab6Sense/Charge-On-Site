@@ -35,9 +35,11 @@ const AntLogInForm = () => {
     dispatch(login(credentials));
   };
 
-  Cookies.set('AccessToken', accessToken, {
-    expires: 7,
-  });
+  useEffect(()=>{
+    Cookies.set('AccessToken', accessToken, {
+      expires: 7,
+    });
+  },[accessToken])
 
   //  console.log("----e--e-e-e",accessToken);
 
