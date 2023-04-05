@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/Redux/User/actions';
+import { wrapper } from '@/Redux/store';
+import Cookies from 'js-cookie';
 
 const AntLogInForm = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+ 
+  const [accessToken, setAccessToken] = useState(null);
+  useEffect(() => {
+    setAccessToken(state?.reducer?.user?.data?.accessToken);
+  }, [state]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +35,16 @@ const AntLogInForm = () => {
     };
     dispatch(login(credentials));
   };
+
+  Cookies.set('AccessToken', accessToken, {
+    expires: 7,
+  });
+
+   console.log("----e--e-e-e",accessToken);
+
+  // const accessTokenCookie=Cookies.get("AccessToken")
+  console.log("Get AccessToken from cookie",Cookies.get("AccessToken"));
+
 
   return (
     <>

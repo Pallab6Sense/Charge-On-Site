@@ -8,3 +8,15 @@ export const login = createAsyncThunk('user/login', async (credentials) => {
   );
   return response.data;
 });
+
+export const fetchUserData = createAsyncThunk(
+  'user/fetchUserData',
+  async (token) => {
+    // console.log('redux token',token);
+    const response = await axios.get(
+      'https://test-api.chargeonsite.com/user/me',
+      { headers: { "Authorization": `Bearer ${token}` } }
+    );
+    return response.data;
+  }
+);
