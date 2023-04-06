@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
-import { Button, Layout, Menu, Spin, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 const { Title } = Typography;
 import { fetchUserData } from '@/Redux/User/actions';
-import { useRouter } from 'next/router';
 import Navbar from '@/Components/Navbar';
-import Cookies from 'js-cookie';
+import { getAccessToken } from '@/Axios/interceptors';
 
 function welcome() {
   const dispatch = useDispatch();
@@ -14,7 +13,10 @@ function welcome() {
     (state) => state?.reducer?.user?.data?.accessToken
   );
 
-  Cookies.set('accessToken',  accessToken , { expires: 7 });
+  let sendAccesToken = getAccessToken;
+
+  sendAccesToken(accessToken); //!Sending ACCESS_TOKEN to the axios interceptors
+
   useEffect(() => {
     dispatch(fetchUserData());
   }, [dispatch]);
@@ -82,15 +84,6 @@ function welcome() {
     },
   ];
 
-  const router = useRouter();
-
-  let resetAccessToken = state?.reducer?.user?.data?.accessToken;
-  // console.log('resetAccessToken', resetAccessToken);
-  function handleClick() {
-    resetAccessToken = null;
-    router.push('/');
-  }
-
   return (
     <>
       <div className="welcome-div">
@@ -109,9 +102,7 @@ function welcome() {
           <Spin></Spin>
         )}
 
-        <Button className="ant-btn" onClick={handleClick}>
-          Logout
-        </Button>
+        <Button className="ant-btn">Logout</Button>
       </div>
     </>
   );

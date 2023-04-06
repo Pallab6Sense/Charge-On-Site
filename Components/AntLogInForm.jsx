@@ -20,12 +20,8 @@ const AntLogInForm = () => {
   };
   const onFinish = (e) => {
     e.preventDefault;
-    const credentials = {
-      email,
-      password,
-      type,
-    };
-    dispatch(login(credentials));
+ 
+    dispatch(login());
   };
 
   return (
