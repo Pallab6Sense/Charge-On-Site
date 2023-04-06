@@ -9,12 +9,12 @@ const AntLogInForm = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
- 
-  const [accessToken, setAccessToken] = useState(null);
-  useEffect(() => {
-    setAccessToken(state?.reducer?.user?.data?.accessToken);
-  }, [state]);
+  // const state = useSelector((state) => state);
+
+  // const [accessToken, setAccessToken] = useState(null);
+  // useEffect(() => {
+  //   setAccessToken(state?.reducer?.user?.data?.accessToken);
+  // }, [state]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,17 +35,11 @@ const AntLogInForm = () => {
     dispatch(login(credentials));
   };
 
-  useEffect(()=>{
-    Cookies.set('AccessToken', accessToken, {
-      expires: 7,
-    });
-  },[accessToken])
-
-  //  console.log("----e--e-e-e",accessToken);
-
-  // const accessTokenCookie=Cookies.get("AccessToken")
-  // console.log("Get AccessToken from cookie",Cookies.get("AccessToken"));
-
+  // useEffect(() => {
+  //   Cookies.set('AccessToken', accessToken, {
+  //     expires: 7,
+  //   });
+  // }, [accessToken]);
 
   return (
     <>

@@ -60,7 +60,7 @@
 import { HYDRATE, createWrapper } from 'next-redux-wrapper';
 import user from './User/userSlice';
 import { message } from 'antd';
-
+import storage from 'redux-persist/lib/storage';
 const { configureStore, combineReducers } = require('@reduxjs/toolkit');
 
 const combinedReducer = combineReducers({
@@ -73,28 +73,60 @@ const combinedReducer = combineReducers({
 //   },
 // });
 
-const masterReducer = (state, action) => {
-  if (action.type === HYDRATE) {
-    const nextState = {
-      ...state,
-      // user: { 
-      //   data: [ ...action.payload.reducer.user.data, ...state.user.data ],
-      // },
-      // ...action.payload
-    };
-    return nextState;
+// const masterReducer = (state, action) => {
+//   if (action.type === HYDRATE) {
+//     const nextState = {
+//       ...state,
+//       // user: { 
+//       //   data: [ ...action.payload.reducer.user.data, ...state.user.data ],
+//       // },
+//       ...action.payload
+//     };
+//     return nextState;
+//   } else {
+//     return combinedReducer(state, action);
+//   }
+// };
+
+// const initStore = () => {
+//   return configureStore({
+//     reducer: {
+//       reducer: masterReducer,
+//     },
+//   });
+// };
+// // export default store;
+
+// export const wrapper = createWrapper(initStore);
+
+const makeStore = ({ isServer }) => {
+  if (isServer) {
+    //If it's on server side, create a store
+    return configureStore(combinedReducer);
   } else {
-    return combinedReducer(state, action);
+    //If it's on client side, create a store which will persist
+    const { persistStore, persistReducer } = require('redux-persist');
+
+    const persistConfig = {
+      key: 'nextjs',
+      // whitelist: ['counter'], // only counter will be persisted, add other reducers if needed
+      storage, // if needed, use a safer storage
+    };
+
+    const persistedReducer = persistReducer(persistConfig, combinedReducer); // Create a new reducer with our existing reducer
+
+    const store = configureStore({
+            reducer: {
+              reducer: persistedReducer,
+            },
+          
+          }); // Creating the store again
+
+    store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
+
+    return store;
   }
 };
 
-const initStore = () => {
-  return configureStore({
-    reducer: {
-      reducer: masterReducer,
-    },
-  });
-};
-// export default store;
-
-export const wrapper = createWrapper(initStore);
+// Export the wrapper & wrap the pages/_app.js with this wrapper only
+export const wrapper = createWrapper(makeStore);

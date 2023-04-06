@@ -9,31 +9,21 @@ import { fetchUserData } from '@/Redux/User/actions';
 import { useRouter } from 'next/router';
 
 function welcome() {
-  const getAccesTokenFromCookie = Cookies.get('AccessToken');
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUserData(getAccesTokenFromCookie));
-  }, [dispatch, getAccesTokenFromCookie]);
 
-  const state = useSelector((state) => state);
 
+  const accessToken = useSelector((state) => state?.reducer?.user?.data?.accessToken);
+
+  // console.log("From welcome page",accessToken);
+
+   useEffect(() => {
+    dispatch(fetchUserData(accessToken));
+  }, [accessToken,dispatch]);
  
-  const [accessToken, setAccessToken] = useState(null);
-  useEffect(() => {
-    setAccessToken(state?.reducer?.user?.data?.accessToken);
-  }, [state]);
-
-  useEffect(()=>{
-    Cookies.set('AccessToken', accessToken, {
-      expires: 7,
-    });
-  },[accessToken])
-
-  Cookies.set('AccessToken', accessToken, {
-    expires: 7,
-  });
+  
+  const state=useSelector((state)=>state);
 
   const [fetchEmail, setFetchEmail] = useState(null);
   const [fetchFName, setFetchFName] = useState(null);
@@ -128,6 +118,5 @@ function welcome() {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => {});
 
 export default welcome;
