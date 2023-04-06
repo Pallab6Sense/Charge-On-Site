@@ -112,11 +112,33 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
   display: grid;
   justify-content: center;
   grid-gap: 20px;
-  max-width: 520px;
-  margin: 15rem auto;
+  // max-width: 520px;
+  // margin: auto;
+  width: 100%;
   justify-items: center;
   padding-left: clamp(1rem, -0.25rem + 3.333vw, 2.75rem);
   padding-right: clamp(1rem, -0.25rem + 3.333vw, 2.75rem);
+
+  // padding-top: 30px;
+}
+
+.navbar{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.header{
+  display: flex;
+
+}
+.ant-btn-nav{
+  background-color: white;
+  width: fit-content;
+  color: black;
 }
 
 .ant-notification {

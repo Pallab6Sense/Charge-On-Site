@@ -1,3 +1,5 @@
+// import { axiosInstance } from '@/Axios/axiosInstance';
+import axiosInstance from '@/Axios/interceptors';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -9,14 +11,11 @@ export const login = createAsyncThunk('user/login', async (credentials) => {
   return response.data;
 });
 
+// console.log("++++",axiosInstance.get('/user/me'));
 export const fetchUserData = createAsyncThunk(
   'user/fetchUserData',
-  async (token) => {
-    // console.log('redux token',token);
-    const response = await axios.get(
-      'https://test-api.chargeonsite.com/user/me',
-      { headers: { "Authorization": `Bearer ${token}` } }
-    );
+  async () => {
+    const response = await axiosInstance.get('/user/me');
     return response.data;
   }
 );

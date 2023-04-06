@@ -1,19 +1,24 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
-import { Button, Spin, Table, Typography } from 'antd';
+import { Button, Layout, Menu, Spin, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 const { Title } = Typography;
 import { fetchUserData } from '@/Redux/User/actions';
 import { useRouter } from 'next/router';
+import Navbar from '@/Components/Navbar';
+import Cookies from 'js-cookie';
 
 function welcome() {
-
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state?.reducer?.user?.data?.accessToken);
-   useEffect(() => {
-    dispatch(fetchUserData(accessToken));
-  }, [accessToken,dispatch]);
-  const state=useSelector((state)=>state);
+  const accessToken = useSelector(
+    (state) => state?.reducer?.user?.data?.accessToken
+  );
+
+  Cookies.set('accessToken',  accessToken , { expires: 7 });
+  useEffect(() => {
+    dispatch(fetchUserData());
+  }, [dispatch]);
+  const state = useSelector((state) => state);
   const [fetchEmail, setFetchEmail] = useState(null);
   const [fetchFName, setFetchFName] = useState(null);
   const [fetchLName, setFetchLName] = useState(null);
@@ -77,12 +82,20 @@ function welcome() {
     },
   ];
 
-  // const router = useRouter();
+  const router = useRouter();
 
- 
+  let resetAccessToken = state?.reducer?.user?.data?.accessToken;
+  // console.log('resetAccessToken', resetAccessToken);
+  function handleClick() {
+    resetAccessToken = null;
+    router.push('/');
+  }
+
   return (
     <>
       <div className="welcome-div">
+        <Navbar />
+
         <Title style={{ fontSize: '55px', color: 'blue' }}>Welcome User</Title>
 
         {data !== 'undefined' ? (
@@ -96,13 +109,12 @@ function welcome() {
           <Spin></Spin>
         )}
 
-        {/* <Button className="ant-btn" onClick={handleClick}>
+        <Button className="ant-btn" onClick={handleClick}>
           Logout
-        </Button> */}
+        </Button>
       </div>
     </>
   );
 }
-
 
 export default welcome;
