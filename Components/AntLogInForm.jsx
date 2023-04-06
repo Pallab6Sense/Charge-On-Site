@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'antd';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { login } from '@/Redux/User/actions';
+import { getCredentials } from '@/Axios/interceptors';
 
 const AntLogInForm = () => {
   const router = useRouter();
@@ -18,6 +19,11 @@ const AntLogInForm = () => {
       ? router.push('/welcome')
       : null;
   };
+
+  let sendCredentials=getCredentials;
+
+  sendCredentials({email,password,type});
+
   const onFinish = (e) => {
     e.preventDefault;
  

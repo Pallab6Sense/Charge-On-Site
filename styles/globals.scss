@@ -1,4 +1,4 @@
-$login-Form-Color-Primary:rgb(6, 70, 6);
+$login-Form-Color-Primary: rgb(6, 70, 6);
 
 * {
   box-sizing: border-box;
@@ -15,9 +15,7 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
   padding-left: clamp(1rem, -0.25rem + 3.333vw, 2.75rem);
   padding-right: clamp(1rem, -0.25rem + 3.333vw, 2.75rem);
   margin-bottom: 5em;
-
 }
-
 
 .form-div {
   display: flex;
@@ -25,7 +23,8 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   border-top: 10px solid $login-Form-Color-Primary;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -58,9 +57,12 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
   margin-bottom: 0px;
 }
 
-:where(.css-dev-only-do-not-override-1e3x2xa).ant-form-vertical .ant-form-item-label,
+:where(.css-dev-only-do-not-override-1e3x2xa).ant-form-vertical
+  .ant-form-item-label,
 :where(.css-dev-only-do-not-override-1e3x2xa).ant-col-24.ant-form-item-label,
-:where(.css-dev-only-do-not-override-1e3x2xa).ant-col-xl-24.ant-form-item-label {
+:where(
+    .css-dev-only-do-not-override-1e3x2xa
+  ).ant-col-xl-24.ant-form-item-label {
   padding-bottom: 5px;
 }
 
@@ -70,7 +72,7 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
 
 .ant-text {
   color: $login-Form-Color-Primary;
-  font-size: clamp(16px, .5rem + 1vw, 18px);
+  font-size: clamp(16px, 0.5rem + 1vw, 18px);
 }
 
 .ant-txt {
@@ -83,9 +85,8 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
   color: $login-Form-Color-Primary;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: .8rem;
+  padding-bottom: 0.8rem;
 }
-
 
 .ant-btn {
   background-color: $login-Form-Color-Primary;
@@ -94,9 +95,8 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
 }
 
 .password {
-  padding-bottom: .8rem;
+  padding-bottom: 0.8rem;
 }
-
 
 .ant-btn:hover {
   cursor: pointer;
@@ -122,23 +122,30 @@ $login-Form-Color-Primary:rgb(6, 70, 6);
   // padding-top: 30px;
 }
 
-.navbar{
+.navbar {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
-.header{
+.header {
   display: flex;
-
 }
-.ant-btn-nav{
+.ant-btn-nav {
   background-color: white;
   width: fit-content;
   color: black;
+  cursor: pointer;
+}
+
+.ant-btn-nav:hover {
+  cursor: pointer;
+  // border: 1px solid blue;
+  background-color: transparent;
 }
 
 .ant-notification {

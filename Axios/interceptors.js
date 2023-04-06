@@ -7,14 +7,15 @@ let ACCESS_TOKEN = '';
 export const getAccessToken = (token) => {
   ACCESS_TOKEN = token;
 };
+
+let credentials=null;
+
+export const getCredentials = (credentialsFromLogin) => {
+  credentials=credentialsFromLogin;
+}
 axiosInstance.interceptors.request.use((config) => {
   if (config.method === 'post' && config.url === '/user/login/admin') {
-    // config.headers['X-Custom-Header'] = 'Hello';
-    config.data = {
-      email: 'jo@email.com',
-      password: '2&57DyhUTH1c',
-      type:'email'
-    };
+    config.data = credentials
     return config;
   }
   if (config.method === 'get' && config.url === '/user/me') {
