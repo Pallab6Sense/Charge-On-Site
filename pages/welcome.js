@@ -1,30 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
 import { Button, Spin, Table, Typography } from 'antd';
-import { wrapper } from '@/Redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 const { Title } = Typography;
-import Cookies from 'js-cookie';
 import { fetchUserData } from '@/Redux/User/actions';
 import { useRouter } from 'next/router';
 
 function welcome() {
 
   const dispatch = useDispatch();
-
-
-
   const accessToken = useSelector((state) => state?.reducer?.user?.data?.accessToken);
-
-  // console.log("From welcome page",accessToken);
-
    useEffect(() => {
     dispatch(fetchUserData(accessToken));
   }, [accessToken,dispatch]);
- 
-  
   const state=useSelector((state)=>state);
-
   const [fetchEmail, setFetchEmail] = useState(null);
   const [fetchFName, setFetchFName] = useState(null);
   const [fetchLName, setFetchLName] = useState(null);
@@ -88,12 +77,9 @@ function welcome() {
     },
   ];
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const handleClick = () => {
-    Cookies.remove('AccessToken');
-    router.push('/')
-  };
+ 
   return (
     <>
       <div className="welcome-div">
@@ -110,9 +96,9 @@ function welcome() {
           <Spin></Spin>
         )}
 
-        <Button className="ant-btn" onClick={handleClick}>
+        {/* <Button className="ant-btn" onClick={handleClick}>
           Logout
-        </Button>
+        </Button> */}
       </div>
     </>
   );
