@@ -5,21 +5,28 @@ import { useDispatch, useSelector } from 'react-redux';
 const { Title } = Typography;
 import { fetchUserData } from '@/Redux/User/actions';
 import Navbar from '@/Components/Navbar';
-import { getAccessToken } from '@/Axios/interceptors';
+import { getAccessToken, getRefreshToken } from '@/Axios/interceptors';
 
 function welcome() {
   const dispatch = useDispatch();
   const accessToken = useSelector(
     (state) => state?.reducer?.user?.data?.accessToken
   );
-
+  const refreshToken = useSelector(
+    (state) => state?.reducer?.user?.data?.refreshToken
+  );
+  let sendRefreshToken = getRefreshToken;
   let sendAccesToken = getAccessToken;
 
-  sendAccesToken(accessToken); //!Sending ACCESS_TOKEN to the axios interceptors
+  useEffect(() => {
+    sendAccesToken(accessToken); //!Sending ACCESS_TOKEN to the axios interceptors
+    sendRefreshToken(refreshToken);
+  }, [accessToken,refreshToken,sendAccesToken,sendRefreshToken]);
 
   useEffect(() => {
     dispatch(fetchUserData());
-  }, [dispatch]);
+  }, [accessToken, dispatch]);
+
   const state = useSelector((state) => state);
   const [fetchEmail, setFetchEmail] = useState(null);
   const [fetchFName, setFetchFName] = useState(null);

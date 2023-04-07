@@ -1,10 +1,12 @@
 import { createWrapper } from 'next-redux-wrapper';
 import user from './User/userSlice';
+import property from './PropertyList/propertySlice';
 import storage from 'redux-persist/lib/storage';
 const { configureStore, combineReducers } = require('@reduxjs/toolkit');
 
 const combinedReducer = combineReducers({
   user,
+  property
 });
 
 const makeStore = ({ isServer }) => {

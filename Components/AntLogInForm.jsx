@@ -82,7 +82,7 @@ const AntLogInForm = () => {
 
         <Form.Item>
           <Button className="ant-btn" htmlType="submit" onClick={handleClick}>
-            Submit
+            Login
           </Button>
         </Form.Item>
       </Form>
