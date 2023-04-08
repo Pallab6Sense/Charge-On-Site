@@ -4,10 +4,10 @@ import {
   fetchProperties,
   getCurrent,
 } from '@/Redux/PropertyList/propertyAction';
-import { Button, Table } from 'antd';
+import { Breadcrumb, Button, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Link from 'next/link';
 function propertyList() {
   const accessToken = useSelector(
     (state) => state?.reducer?.user?.data?.accessToken
@@ -96,6 +96,14 @@ function propertyList() {
   return (
     <>
       <div className="ant-table-property">
+        <div className="property-navbar">
+          <Breadcrumb
+            items={[
+              { title: <Link href="/welcome">Home</Link> },
+              { title: <Link href="/propertyList">Property</Link> },
+            ]}
+          ></Breadcrumb>
+        </div>
         <Table dataSource={data} columns={columns} pagination={false}></Table>
         <div className="load-more">
           <Button className="load-more-btn" onClick={handleLoadMore}>
