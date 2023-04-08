@@ -155,18 +155,27 @@ $login-Form-Color-Primary: rgb(6, 70, 6);
   top: 100px;
 }
 
-.ant-table-property{
+.ant-table-property {
   max-width: 1100px;
   margin: 5rem auto;
 }
 
-.property-name{
+.property-name {
   display: flex;
   justify-content: flex-start;
   gap: 10px;
 }
-.property-name img{
+.property-name img {
   width: 8%;
+}
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.load-more-btn {
+  width: auto;
+  background-color: $login-Form-Color-Primary;
 }
 @media screen and (max-width: 768px) {
   .content {

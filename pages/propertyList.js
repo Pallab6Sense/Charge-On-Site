@@ -1,7 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { fetchProperties } from '@/Redux/PropertyList/propertyAction';
-import { Table } from 'antd';
+import {
+  fetchProperties,
+  getCurrent,
+} from '@/Redux/PropertyList/propertyAction';
+import { Button, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,10 +13,12 @@ function propertyList() {
     (state) => state?.reducer?.user?.data?.accessToken
   );
 
+  let [current, setCurrent] = useState(3);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProperties(accessToken));
-  }, [accessToken, dispatch]);
+  }, [accessToken, dispatch, current]);
 
   const state = useSelector((state) => state);
   let propertyList = state?.reducer?.property?.propertyData?.data;
@@ -22,6 +27,13 @@ function propertyList() {
   useEffect(() => {
     setData(propertyList);
   }, [propertyList]);
+
+  let sendCurrent = getCurrent;
+  sendCurrent(current);
+  function handleLoadMore() {
+    setCurrent(current + 3);
+    sendCurrent(current);
+  }
 
   const columns = [
     {
@@ -85,6 +97,11 @@ function propertyList() {
     <>
       <div className="ant-table-property">
         <Table dataSource={data} columns={columns} pagination={false}></Table>
+        <div className="load-more">
+          <Button className="load-more-btn" onClick={handleLoadMore}>
+            Load More
+          </Button>
+        </div>
       </div>
     </>
   );
