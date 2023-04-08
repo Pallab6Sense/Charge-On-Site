@@ -15,7 +15,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container">
-        {loading ? <Spin size="large" tip="Loading"></Spin> : <LoginForm />}
+        {/* {loading ? <Spin size="large" tip="Loading"></Spin> : <LoginForm />} */}
+        <LoginForm></LoginForm>
       </div>
     </>
   );

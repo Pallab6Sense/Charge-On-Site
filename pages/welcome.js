@@ -6,6 +6,9 @@ const { Title } = Typography;
 import { fetchUserData } from '@/Redux/User/actions';
 import Navbar from '@/Components/Navbar';
 import { getAccessToken, getRefreshToken } from '@/Axios/interceptors';
+import Link from 'next/link';
+import { logOut } from '@/Redux/User/userSlice';
+import { useRouter } from 'next/router';
 
 function welcome() {
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ function welcome() {
   useEffect(() => {
     sendAccesToken(accessToken); //!Sending ACCESS_TOKEN to the axios interceptors
     sendRefreshToken(refreshToken);
-  }, [accessToken,refreshToken,sendAccesToken,sendRefreshToken]);
+  }, [accessToken, refreshToken, sendAccesToken, sendRefreshToken]);
 
   useEffect(() => {
     dispatch(fetchUserData());
@@ -91,6 +94,13 @@ function welcome() {
     },
   ];
 
+  const loading = useSelector((state) => state?.reducer?.user?.loading);
+  const router = useRouter();
+  function handleClick() {
+    dispatch(logOut());
+    router.push('/');
+  }
+
   return (
     <>
       <div className="welcome-div">
@@ -104,12 +114,15 @@ function welcome() {
             columns={columns}
             pagination={false}
             size="large"
+            loading={loading}
           />
         ) : (
           <Spin></Spin>
         )}
 
-        <Button className="ant-btn">Logout</Button>
+        <Button className="ant-btn" onClick={handleClick}>
+          Log out
+        </Button>
       </div>
     </>
   );

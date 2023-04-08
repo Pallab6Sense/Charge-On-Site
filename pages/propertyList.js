@@ -22,6 +22,7 @@ function propertyList() {
 
   const state = useSelector((state) => state);
   let propertyList = state?.reducer?.property?.propertyData?.data;
+  const loading = state?.reducer?.property?.status;
 
   const [data, setData] = useState();
   useEffect(() => {
@@ -50,6 +51,7 @@ function propertyList() {
           </>
         );
       },
+      width: '20%',
     },
     {
       title: 'Address',
@@ -58,6 +60,8 @@ function propertyList() {
       render: (_, record) => {
         return <>{record?._source?.address}</>;
       },
+      width: '20%',
+      ellipsis: true,
     },
     {
       title: 'Company',
@@ -66,6 +70,8 @@ function propertyList() {
       render: (_, record) => {
         return <>{record?._source?.currentCompanyName}</>;
       },
+      width: '20%',
+      ellipsis: true,
     },
     {
       title: 'Entity',
@@ -104,9 +110,20 @@ function propertyList() {
             ]}
           ></Breadcrumb>
         </div>
-        <Table dataSource={data} columns={columns} pagination={false}></Table>
+        <div className="ant-table">
+          <Table
+            dataSource={data}
+            columns={columns}
+            pagination={false}
+            loading={loading}
+          ></Table>
+        </div>
         <div className="load-more">
-          <Button className="load-more-btn" onClick={handleLoadMore}>
+          <Button
+            className="load-more-btn"
+            onClick={handleLoadMore}
+            loading={loading}
+          >
             Load More
           </Button>
         </div>

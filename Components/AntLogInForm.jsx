@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/Redux/User/actions';
 import { getCredentials } from '@/Axios/interceptors';
 
@@ -13,25 +13,43 @@ const AntLogInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const type = 'email';
-
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (placement, message) => {
+    api.info({
+      message: `${message}`,
+      duration: 1,
+      closeIcon: '',
+      placement,
+      className:'notification',
+    });
+  };
   const handleClick = () => {
-    email === 'jo@email.com' && password === '2&57DyhUTH1c' && type === 'email'
-      ? router.push('/welcome')
-      : null;
+    if (
+      email === 'jo@email.com' &&
+      password === '2&57DyhUTH1c' &&
+      type === 'email'
+    ) {
+      openNotification('top', 'Logged In successfully');
+      router.push('/welcome');
+    } else {
+      openNotification('top', 'Check Email and Password');
+    }
   };
 
-  let sendCredentials=getCredentials;
+  let sendCredentials = getCredentials;
 
-  sendCredentials({email,password,type});
+  sendCredentials({ email, password, type });
 
   const onFinish = (e) => {
     e.preventDefault;
- 
+
     dispatch(login());
   };
+  const loading = useSelector((state) => state?.reducer?.user?.loading);
 
   return (
     <>
+      {contextHolder}
       <Form
         name="basic"
         labelCol={{
@@ -81,7 +99,12 @@ const AntLogInForm = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button className="ant-btn" htmlType="submit" onClick={handleClick}>
+          <Button
+            className="ant-btn"
+            htmlType="submit"
+            onClick={handleClick}
+            loading={loading}
+          >
             Login
           </Button>
         </Form.Item>

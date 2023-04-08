@@ -14,10 +14,10 @@ const propertiesSlice = createSlice({
   },
   extraReducers: {
     [fetchProperties.pending]: (state, action) => {
-      state.status = 'loading';
+      state.status = true;
     },
     [fetchProperties.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
+      state.status = false;
       state.propertyData = action.payload;
     },
     [fetchProperties.rejected]: (state, action) => {

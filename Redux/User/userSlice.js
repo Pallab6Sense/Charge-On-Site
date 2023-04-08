@@ -3,14 +3,19 @@ import { fetchUserData, login } from './actions';
 
 const initialState = {
   data: null,
-  loading: false,
+  loading: true,
   error: null,
-  fetchedData:null
+  fetchedData: null,
 };
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logOut(state) {
+      state.data = null;
+      state.fetchedData = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -35,4 +40,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { logOut } = userSlice.actions;
 export default userSlice.reducer;

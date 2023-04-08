@@ -30,6 +30,11 @@ $login-Form-Color-Primary: rgb(6, 70, 6);
   padding-bottom: 2rem;
 }
 
+.notification {
+  height: fit-content;
+  width: fit-content;
+}
+
 .content {
   max-width: 350px;
   margin: auto;
@@ -160,6 +165,7 @@ $login-Form-Color-Primary: rgb(6, 70, 6);
 .ant-table-property {
   max-width: 1100px;
   margin: auto;
+  margin-bottom: 30px;
 }
 
 .property-navbar {
@@ -172,6 +178,9 @@ $login-Form-Color-Primary: rgb(6, 70, 6);
 }
 .property-name img {
   width: 8%;
+}
+.ant-table {
+  text-overflow: ellipsis;
 }
 .load-more {
   display: flex;
