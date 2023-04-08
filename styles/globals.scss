@@ -1,4 +1,4 @@
-$login-Form-Color-Primary: rgb(6, 70, 6);
+$login-Form-Color-Primary: #115955;
 
 * {
   box-sizing: border-box;
@@ -46,7 +46,7 @@ $login-Form-Color-Primary: rgb(6, 70, 6);
 }
 
 .img img {
-  width: 80%;
+  width: 60%;
 }
 
 .description {
@@ -54,7 +54,7 @@ $login-Form-Color-Primary: rgb(6, 70, 6);
   justify-content: center;
   justify-items: center;
   padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   text-align: center;
 }
 
@@ -77,7 +77,9 @@ $login-Form-Color-Primary: rgb(6, 70, 6);
 
 .ant-text {
   color: $login-Form-Color-Primary;
-  font-size: clamp(16px, 0.5rem + 1vw, 18px);
+  font-family: 'roboto';
+  font-size: 14px;
+  font-weight: 550;
 }
 
 .ant-txt {
