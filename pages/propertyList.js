@@ -8,6 +8,7 @@ import { Breadcrumb, Button, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import Logout from '@/Components/Logout';
 function propertyList() {
   const accessToken = useSelector(
     (state) => state?.reducer?.user?.data?.accessToken
@@ -99,37 +100,39 @@ function propertyList() {
     },
   ];
 
-  return (
-    <>
-      <div className="ant-table-property">
-        <div className="property-navbar">
-          <Breadcrumb
-            items={[
-              { title: <Link href="/welcome">Home</Link> },
-              { title: <Link href="/propertyList">Property</Link> },
-            ]}
-          ></Breadcrumb>
-        </div>
-        <div className="ant-table">
-          <Table
-            dataSource={data}
-            columns={columns}
-            pagination={false}
-            loading={loading}
-          ></Table>
-        </div>
-        <div className="load-more">
-          <Button
-            className="load-more-btn"
-            onClick={handleLoadMore}
-            loading={loading}
-          >
-            Load More
-          </Button>
+  return <>
+    <div className="ant-table-property">
+      <div className="property-navbar">
+        
+        <Breadcrumb
+          items={[
+            { title: <Link href="/welcome">Home</Link> },
+            { title: <Link href="/propertyList">Property</Link> },
+          ]}
+        ></Breadcrumb>
+        <div className="logout">
+          <Logout />
         </div>
       </div>
-    </>
-  );
+      <div className="ant-table">
+        <Table
+          dataSource={data}
+          columns={columns}
+          pagination={false}
+          loading={loading}
+        ></Table>
+      </div>
+      <div className="load-more">
+        <Button
+          className="load-more-btn"
+          onClick={handleLoadMore}
+          loading={loading}
+        >
+          Load More
+        </Button>
+      </div>
+    </div>
+  </>;
 }
 
 export default propertyList;

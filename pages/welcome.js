@@ -96,15 +96,12 @@ function welcome() {
 
   const loading = useSelector((state) => state?.reducer?.user?.loading);
   const router = useRouter();
-  function handleClick() {
-    dispatch(logOut());
-    router.push('/');
-  }
+  
 
   return (
     <>
       <div className="welcome-div">
-        <Navbar />
+        <Navbar fname={fetchFName} lname={fetchLName}/>
 
         <Title style={{ fontSize: '55px', color: 'blue' }}>Welcome User</Title>
 
@@ -120,9 +117,7 @@ function welcome() {
           <Spin></Spin>
         )}
 
-        <Button className="ant-btn" onClick={handleClick}>
-          Log out
-        </Button>
+        
       </div>
     </>
   );
