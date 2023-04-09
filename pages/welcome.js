@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
-import {Spin, Table, Typography } from 'antd';
+import { Skeleton, Spin, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 const { Title } = Typography;
 import { fetchUserData } from '@/Redux/User/actions';
@@ -92,29 +92,34 @@ function welcome() {
   ];
 
   const loading = useSelector((state) => state?.reducer?.user?.loading);
-  
 
   return (
     <>
-      <div className="welcome-div">
-        <Navbar fname={fetchFName} lname={fetchLName}/>
+      {loading ? (
+        <div className="skeleton">
+          <Skeleton active loading={loading}></Skeleton>
+        </div>
+      ) : (
+        <div className="welcome-div">
+          <Navbar fname={fetchFName} lname={fetchLName} />
 
-        <Title style={{ fontSize: '55px', color: 'blue' }}>Welcome {fetchFName} {fetchLName}</Title>
+          <Title style={{ fontSize: '55px', color: 'blue' }}>
+            Welcome {fetchFName} {fetchLName}
+          </Title>
 
-        {data !== 'undefined' ? (
-          <Table
-            dataSource={dataSource}
-            columns={columns}
-            pagination={false}
-            size="large"
-            loading={loading}
-          />
-        ) : (
-          <Spin></Spin>
-        )}
-
-        
-      </div>
+          {data !== 'undefined' ? (
+            <Table
+              dataSource={dataSource}
+              columns={columns}
+              pagination={false}
+              size="large"
+              loading={loading}
+            />
+          ) : (
+            <Spin></Spin>
+          )}
+        </div>
+      )}
     </>
   );
 }
