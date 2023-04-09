@@ -3,7 +3,7 @@ import { fetchUserData, login } from './actions';
 
 const initialState = {
   data: null,
-  loading: null,
+  loading: true,
   error: null,
   fetchedData: null,
 };
