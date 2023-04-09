@@ -101,7 +101,7 @@ const AntLogInForm = () => {
             className="ant-btn"
             htmlType="submit"
             onClick={handleClick}
-            loading={loading}
+            // loading={loading}
           >
             Login
           </Button>
