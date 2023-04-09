@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Form, Input, notification } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/Redux/User/actions';
@@ -13,14 +13,12 @@ const AntLogInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const type = 'email';
-  const [api, contextHolder] = notification.useNotification();
-  const openNotification = (placement, message) => {
-    api.info({
-      message: `${message}`,
-      duration: 1,
-      closeIcon: '',
-      placement,
-      className:'notification',
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const logInMessage = (type, message) => {
+    messageApi.open({
+      type: type,
+      content: message,
     });
   };
   const handleClick = () => {
@@ -29,10 +27,10 @@ const AntLogInForm = () => {
       password === '2&57DyhUTH1c' &&
       type === 'email'
     ) {
-      openNotification('top', 'Logged In successfully');
+      logInMessage('success', 'Login successful');
       router.push('/welcome');
     } else {
-      openNotification('top', 'Check Email and Password');
+      logInMessage('error', 'Check Email and Password');
     }
   };
 
