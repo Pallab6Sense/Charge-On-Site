@@ -1,14 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
-import { Button, Spin, Table, Typography } from 'antd';
+import {Spin, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 const { Title } = Typography;
 import { fetchUserData } from '@/Redux/User/actions';
 import Navbar from '@/Components/Navbar';
 import { getAccessToken, getRefreshToken } from '@/Axios/interceptors';
-import Link from 'next/link';
-import { logOut } from '@/Redux/User/userSlice';
-import { useRouter } from 'next/router';
 
 function welcome() {
   const dispatch = useDispatch();
@@ -95,7 +92,6 @@ function welcome() {
   ];
 
   const loading = useSelector((state) => state?.reducer?.user?.loading);
-  const router = useRouter();
   
 
   return (
@@ -103,7 +99,7 @@ function welcome() {
       <div className="welcome-div">
         <Navbar fname={fetchFName} lname={fetchLName}/>
 
-        <Title style={{ fontSize: '55px', color: 'blue' }}>Welcome User</Title>
+        <Title style={{ fontSize: '55px', color: 'blue' }}>Welcome {fetchFName} {fetchLName}</Title>
 
         {data !== 'undefined' ? (
           <Table
