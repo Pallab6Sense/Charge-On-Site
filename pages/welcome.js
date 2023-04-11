@@ -103,7 +103,7 @@ function welcome() {
         <div className="welcome-div">
           <Navbar fname={fetchFName} lname={fetchLName} />
 
-          <Title style={{ fontSize: '55px', color: 'blue' }}>
+          <Title style={{ fontSize: '55px', color: '#115955' }}>
             Welcome {fetchFName} {fetchLName}
           </Title>
 
