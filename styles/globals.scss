@@ -194,8 +194,9 @@ $login-Form-Color-Primary: #115955;
   object-fit: scale-down;
 }
 .ant-search-div {
-  max-width: 400px;
-  margin: 20px auto;
+  width: 400px;
+  // margin: 20px auto;
+  margin-bottom: 20px;
 }
 
 .custom-ant-search{

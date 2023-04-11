@@ -105,7 +105,7 @@ function propertyList() {
       },
     },
   ];
-  let sendSearchQuery=getSearchQuery;
+  let sendSearchQuery = getSearchQuery;
   const handleSearchQuery = debounce((e) => {
     setSearch(e?.target?.value);
     sendSearchQuery(search);
@@ -139,6 +139,9 @@ function propertyList() {
             onSearch={onSearch}
             className="custom-ant-search"
           />
+          <p style={{ color: '#969696', fontSize: '14px', marginTop: '10px' }}>
+            Showing Properties: {propertyList?.length}
+          </p>
         </div>
         <div className="ant-table">
           <Table
@@ -148,7 +151,7 @@ function propertyList() {
             className="table"
           ></Table>
         </div>
-        
+
         <div className="load-more">
           <p className="load-more-text">Showing {propertyList?.length}</p>
           <Button
@@ -156,7 +159,7 @@ function propertyList() {
             onClick={handleLoadMore}
             loading={loading}
           >
-            <strong className='btn-text'> Load {3} More</strong>
+            <strong className="btn-text"> Load {3} More</strong>
           </Button>
           <p className="load-more-text">Total {dataCount}</p>
         </div>
