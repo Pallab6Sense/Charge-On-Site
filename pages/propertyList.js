@@ -3,18 +3,22 @@
 import {
   fetchProperties,
   getCurrent,
+  getSearchQuery,
 } from '@/Redux/PropertyList/propertyAction';
-import { Breadcrumb, Button, Table } from 'antd';
+import { Breadcrumb, Button, Table, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Logout from '@/Components/Logout';
+import debounce from 'lodash.debounce';
+const { Search } = Input;
 function propertyList() {
   const accessToken = useSelector(
     (state) => state?.reducer?.user?.data?.accessToken
   );
 
   let [current, setCurrent] = useState(3);
+  const [search, setSearch] = useState('');
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -82,6 +86,7 @@ function propertyList() {
       render: (_, record) => {
         return <>{record?._source?.currentEntityName}</>;
       },
+      ellipsis: true,
     },
     {
       title: 'Locations',
@@ -101,6 +106,16 @@ function propertyList() {
     },
   ];
 
+  const handleSearchQuery = debounce((e) => {
+    setSearch(e?.target?.value);
+    getSearchQuery(search);
+  }, 1000);
+  getSearchQuery(search);
+
+  const onSearch = debounce(() => {
+    dispatch(fetchProperties(accessToken));
+  }, 1000);
+
   return (
     <>
       <div className="ant-table-property">
@@ -114,6 +129,15 @@ function propertyList() {
           <div className="logout">
             <Logout />
           </div>
+        </div>
+        <div className="ant-search-div">
+          <Search
+            placeholder="Search by property,entity and company name"
+            allowClear
+            enterButton="Search"
+            onChange={handleSearchQuery}
+            onSearch={onSearch}
+          />
         </div>
         <div className="ant-table">
           <Table

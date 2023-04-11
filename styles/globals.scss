@@ -190,8 +190,21 @@ $login-Form-Color-Primary: #115955;
   gap: 10px;
 }
 .property-name img {
-  width: 8%;
+  width: 16%;
+  object-fit: scale-down;
 }
+.ant-search-div {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+// .ant-search:focus {
+//   // outline-color: #115955;
+//   border-color: #115955;
+//   outline: 0;
+//   -webkit-box-shadow: 0 0 0 2px rgba(87, 168, 233, 0.2);
+//   box-shadow: 0 0 0 2px rgba(87, 168, 233, 0.2);
+// }
 .ant-table {
   text-overflow: ellipsis;
 }
@@ -206,7 +219,7 @@ $login-Form-Color-Primary: #115955;
   width: auto;
   background-color: $login-Form-Color-Primary;
 }
-.load-more-text{
+.load-more-text {
   color: #8c8686;
 }
 @media screen and (max-width: 768px) {

@@ -7,12 +7,17 @@ export const getCurrent = (number) => {
   current = number;
 };
 
+let searchQuery = '';
+
+export const getSearchQuery = (search) => {
+  searchQuery = search;
+};
+
 export const fetchProperties = createAsyncThunk(
   'properties/fetchProperties',
   async (token) => {
-    console.log('token', token);
     const response = await axios.get(
-      `https://test-api.chargeonsite.com/property?current=1&pageSize=${current}`,
+      `https://test-api.chargeonsite.com/property?current=1&pageSize=${current}&search=${searchQuery}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
