@@ -66,7 +66,7 @@ function propertyList() {
       render: (_, record) => {
         return <>{record?._source?.address}</>;
       },
-      width: '20%',
+      width: '30%',
       ellipsis: true,
     },
     {
@@ -105,16 +105,16 @@ function propertyList() {
       },
     },
   ];
-
+  let sendSearchQuery=getSearchQuery;
   const handleSearchQuery = debounce((e) => {
     setSearch(e?.target?.value);
-    getSearchQuery(search);
+    sendSearchQuery(search);
   }, 1000);
-  getSearchQuery(search);
+  sendSearchQuery(search);
 
   const onSearch = debounce(() => {
     dispatch(fetchProperties(accessToken));
-  }, 1000);
+  }, 2000);
 
   return (
     <>
@@ -137,6 +137,7 @@ function propertyList() {
             enterButton="Search"
             onChange={handleSearchQuery}
             onSearch={onSearch}
+            className="custom-ant-search"
           />
         </div>
         <div className="ant-table">
@@ -144,17 +145,18 @@ function propertyList() {
             dataSource={data}
             columns={columns}
             pagination={false}
-            // loading={loading}
+            className="table"
           ></Table>
         </div>
+        
         <div className="load-more">
-          <p className="load-more-text">Showing {propertyList.length}</p>
+          <p className="load-more-text">Showing {propertyList?.length}</p>
           <Button
             className="load-more-btn"
             onClick={handleLoadMore}
             loading={loading}
           >
-            Load {3} More
+            <strong className='btn-text'> Load {3} More</strong>
           </Button>
           <p className="load-more-text">Total {dataCount}</p>
         </div>

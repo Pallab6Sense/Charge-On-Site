@@ -198,13 +198,10 @@ $login-Form-Color-Primary: #115955;
   margin: 20px auto;
 }
 
-// .ant-search:focus {
-//   // outline-color: #115955;
-//   border-color: #115955;
-//   outline: 0;
-//   -webkit-box-shadow: 0 0 0 2px rgba(87, 168, 233, 0.2);
-//   box-shadow: 0 0 0 2px rgba(87, 168, 233, 0.2);
-// }
+.custom-ant-search{
+  border-radius: 0px;
+}
+
 .ant-table {
   text-overflow: ellipsis;
 }
@@ -217,7 +214,17 @@ $login-Form-Color-Primary: #115955;
 }
 .load-more-btn {
   width: auto;
-  background-color: $login-Form-Color-Primary;
+  background-color: white;
+  border-color: gray;
+  color: #115955;
+  border-radius: 0px;
+}
+.load-more-btn:hover{
+  background-color: white;
+  border-color: #115955;
+}
+btn-text{
+  color: #115955;
 }
 .load-more-text {
   color: #8c8686;

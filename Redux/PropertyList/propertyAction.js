@@ -11,6 +11,7 @@ let searchQuery = '';
 
 export const getSearchQuery = (search) => {
   searchQuery = search;
+  console.log("🚀 ~ file: propertyAction.js:14 ~ getSearchQuery ~ searchQuery:", searchQuery)
 };
 
 export const fetchProperties = createAsyncThunk(
