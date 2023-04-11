@@ -198,11 +198,16 @@ $login-Form-Color-Primary: #115955;
 .load-more {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  margin-top: 15px;
+  gap: 20px;
 }
 .load-more-btn {
   width: auto;
   background-color: $login-Form-Color-Primary;
+}
+.load-more-text{
+  color: #8c8686;
 }
 @media screen and (max-width: 768px) {
   .content {

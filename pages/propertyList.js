@@ -23,6 +23,7 @@ function propertyList() {
 
   const state = useSelector((state) => state);
   let propertyList = state?.reducer?.property?.propertyData?.data;
+  let dataCount = state?.reducer?.property?.propertyData?.count;
   const loading = state?.reducer?.property?.status;
 
   const [data, setData] = useState();
@@ -100,39 +101,42 @@ function propertyList() {
     },
   ];
 
-  return <>
-    <div className="ant-table-property">
-      <div className="property-navbar">
-        
-        <Breadcrumb
-          items={[
-            { title: <Link href="/welcome">Home</Link> },
-            { title: <Link href="/propertyList">Property</Link> },
-          ]}
-        ></Breadcrumb>
-        <div className="logout">
-          <Logout />
+  return (
+    <>
+      <div className="ant-table-property">
+        <div className="property-navbar">
+          <Breadcrumb
+            items={[
+              { title: <Link href="/welcome">Home</Link> },
+              { title: <Link href="/propertyList">Property</Link> },
+            ]}
+          ></Breadcrumb>
+          <div className="logout">
+            <Logout />
+          </div>
+        </div>
+        <div className="ant-table">
+          <Table
+            dataSource={data}
+            columns={columns}
+            pagination={false}
+            // loading={loading}
+          ></Table>
+        </div>
+        <div className="load-more">
+          <p className="load-more-text">Showing {propertyList.length}</p>
+          <Button
+            className="load-more-btn"
+            onClick={handleLoadMore}
+            loading={loading}
+          >
+            Load {3} More
+          </Button>
+          <p className="load-more-text">Total {dataCount}</p>
         </div>
       </div>
-      <div className="ant-table">
-        <Table
-          dataSource={data}
-          columns={columns}
-          pagination={false}
-          // loading={loading}
-        ></Table>
-      </div>
-      <div className="load-more">
-        <Button
-          className="load-more-btn"
-          onClick={handleLoadMore}
-          loading={loading}
-        >
-          Load More
-        </Button>
-      </div>
-    </div>
-  </>;
+    </>
+  );
 }
 
 export default propertyList;
