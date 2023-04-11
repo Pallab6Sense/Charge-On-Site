@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '@/Redux/User/userSlice';
 const { Text } = Typography;
 import { useRouter } from 'next/router';
+import { removePropertyData } from '@/Redux/PropertyList/propertySlice';
 
 function Logout() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function Logout() {
         <Text
           onClick={() => {
             dispatch(logOut());
+            dispatch(removePropertyData());
             router.push('/');
           }}
         >

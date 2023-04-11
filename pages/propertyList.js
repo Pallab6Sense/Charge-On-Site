@@ -119,7 +119,7 @@ function propertyList() {
           dataSource={data}
           columns={columns}
           pagination={false}
-          loading={loading}
+          // loading={loading}
         ></Table>
       </div>
       <div className="load-more">

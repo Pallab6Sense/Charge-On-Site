@@ -10,7 +10,9 @@ const propertiesSlice = createSlice({
   name: 'properties',
   initialState,
   reducers: {
-    // add any extra reducers here
+    removePropertyData(state) {
+      state.propertyData = null;
+    },
   },
   extraReducers: {
     [fetchProperties.pending]: (state, action) => {
@@ -27,4 +29,5 @@ const propertiesSlice = createSlice({
   },
 });
 
+export const {removePropertyData}=propertiesSlice.actions
 export default propertiesSlice.reducer;
