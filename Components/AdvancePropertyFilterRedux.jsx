@@ -17,7 +17,6 @@ export const AdvancePropertyFilterRedux = () => {
     setDrawerOpen(false);
   };
 
-  const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [searchText, setSearchText] = useState('');
@@ -29,7 +28,7 @@ export const AdvancePropertyFilterRedux = () => {
     dispatch(
       fetchCompanies({ accessToken, searchText, pageSize, currentPage })
     );
-  }, [currentPage, searchText, accessToken, pageSize, dispatch]);
+  }, [accessToken, dispatch,searchText]);
   const companyData = state?.reducer?.company?.companyData;
   const totalDataCount =
     state?.reducer?.company?.companyData?.count?.scannedCount;
@@ -39,9 +38,7 @@ export const AdvancePropertyFilterRedux = () => {
     if (pageSize > totalDataCount) {
       return;
     }
-    setIsLoading(true);
 
-    console.log('page size', pageSize);
     if (pageSize <= totalDataCount) {
       setPageSize(pageSize + 20);
       dispatch(
@@ -58,13 +55,12 @@ export const AdvancePropertyFilterRedux = () => {
   };
 
   const handleSearch = debounce((value = '') => {
-    console.log('search', value);
-    setSearchText(value);
-    setPageSize(totalDataCount);
-  }, 1000);
+    dispatch(
+      fetchCompanies({ accessToken, searchText:value, pageSize, currentPage })
+    );
+  }, 500);
 
   const handleOnClear = () => {
-    console.log('Clear');
     setPageSize(20);
     setSearchText('');
     dispatch(
@@ -73,9 +69,8 @@ export const AdvancePropertyFilterRedux = () => {
   };
 
   const handleOnchange = (value) => {
-    console.log('onchange', value);
+    console.log("onChange");
     if (value.length <= 0) {
-      console.log('onchange api call');
       setPageSize(20);
       setSearchText('');
       dispatch(
@@ -84,7 +79,6 @@ export const AdvancePropertyFilterRedux = () => {
     }
   };
   const handleOnMouseLeave = () => {
-    console.log('onMouseLeave');
     setPageSize(20);
     setSearchText('');
     dispatch(
@@ -123,7 +117,6 @@ export const AdvancePropertyFilterRedux = () => {
             onClear={handleOnClear}
             onChange={handleOnchange}
             maxTagCount={3}
-            virtual={false}
             onMouseLeave={handleOnMouseLeave}
           >
             {companyData?.data?.map((item) => {
