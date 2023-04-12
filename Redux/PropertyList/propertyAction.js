@@ -12,7 +12,6 @@ export const getCurrent = (number) => {
 export const fetchProperties = createAsyncThunk(
   'properties/fetchProperties',
   async ({accessToken,search}) => {
-    console.log("+++++++++",search)
     const response = await axios.get(
       `https://test-api.chargeonsite.com/property?current=1&pageSize=${current}&search=${search}`,
       {

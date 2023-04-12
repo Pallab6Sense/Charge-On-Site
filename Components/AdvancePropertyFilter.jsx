@@ -1,4 +1,4 @@
-import { Button, Drawer, Select } from 'antd';
+import { Button, Drawer, Input, Select } from 'antd';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import React, { useEffect, useState } from 'react';
@@ -25,7 +25,6 @@ export const AdvancePropertyFilter = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log('----', searchText);
     axios
       .get(
         `https://test-api.chargeonsite.com/company?pageSize=${pageSize}&current=${currentPage}&search=${searchText}`,
@@ -44,7 +43,7 @@ export const AdvancePropertyFilter = () => {
         console.error(error);
         setIsLoading(false);
       });
-  }, [currentPage, pageSize, searchText, accessToken]);
+  }, [currentPage, searchText, accessToken]);
 
   const loadMore = () => {
     if (pageSize > companyData?.count?.scannedCount) {
@@ -52,8 +51,10 @@ export const AdvancePropertyFilter = () => {
     }
     setIsLoading(true);
 
-    if (pageSize <= companyData?.count?.scannedCount)
+    console.log('page size', pageSize);
+    if (pageSize <= companyData?.count?.scannedCount) {
       setPageSize(pageSize + 20);
+    }
     axios
       .get(
         `https://test-api.chargeonsite.com/company?pageSize=${pageSize}&current=${currentPage}&search=${searchText}`,
@@ -64,7 +65,7 @@ export const AdvancePropertyFilter = () => {
         }
       )
       .then((response) => {
-        setCompanyData([...data, ...response.data.list]);
+        setCompanyData([...companyData, ...response?.data]);
         setHasMore(response.data.pages > currentPage + 1);
         setCurrentPage(currentPage + 1);
         setIsLoading(false);
@@ -84,8 +85,87 @@ export const AdvancePropertyFilter = () => {
   const handleSearch = debounce((value = '') => {
     console.log('search', value);
     setSearchText(value);
-    // setCurrentPage(1);
-  }, 2000);
+    setPageSize(companyData?.count?.scannedCount);
+  }, 1000);
+
+  const handleOnClear = () => {
+    console.log('Clear');
+    setPageSize(20);
+    setSearchText('');
+    axios
+      .get(
+        `https://test-api.chargeonsite.com/company?pageSize=${pageSize}&current=${currentPage}&search=${searchText}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        setCompanyData(response?.data);
+        setHasMore(response.data.pages > currentPage);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
+  };
+
+  const handleOnchange = (value) => {
+    console.log('onchange', value);
+    
+    if (value.length <= 0) {
+      console.log('onchange api call');
+      setPageSize(20);
+    setSearchText('');
+      axios
+        .get(
+          `https://test-api.chargeonsite.com/company?pageSize=${pageSize}&current=${currentPage}&search=${searchText}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          setCompanyData(response?.data);
+          setHasMore(response.data.pages > currentPage);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsLoading(false);
+        });
+    }
+  };
+  const handleOnMouseLeave =() => {
+    console.log('onMouseLeave');
+    
+
+      setPageSize(20);
+    setSearchText('');
+      axios
+        .get(
+          `https://test-api.chargeonsite.com/company?pageSize=${pageSize}&current=${currentPage}&search=${searchText}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          setCompanyData(response?.data);
+          setHasMore(response.data.pages > currentPage);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsLoading(false);
+        });
+    
+  };
+
   return (
     <div>
       <Button className="load-more-btn" onClick={showDrawer}>
@@ -96,24 +176,36 @@ export const AdvancePropertyFilter = () => {
         placement="right"
         onClose={onClose}
         open={drawerOpen}
-        width={600}
+        width={800}
         className="advance-filter-drawer"
       >
         <div className="property-info">
+          <p>Company</p>
           <Select
             mode="multiple"
             allowClear
             placeholder="Select"
-            style={{ width: '100%' }}
+            style={{ width: '85%' }}
             onSearch={handleSearch}
             onPopupScroll={handleScroll}
+            loading={isLoading}
+            onClear={handleOnClear}
+            onChange={handleOnchange}
+            // maxTagCount={3}
+            virtual={false}
+            onMouseLeave={handleOnMouseLeave}
           >
-            {companyData?.data?.map((item) => (
-              <Select.Option key={item?.count?.scannedCount}>
-                {item?.name}
-              </Select.Option>
-            ))}
+            {companyData?.data?.map((item) => {
+              return (
+                <Select.Option
+                  key={item?.id}
+                  value={item?.name}
+                ></Select.Option>
+              );
+            })}
           </Select>
+
+          
         </div>
       </Drawer>
     </div>

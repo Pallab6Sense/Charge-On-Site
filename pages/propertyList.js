@@ -4,18 +4,13 @@ import {
   fetchProperties,
   getCurrent,
 } from '@/Redux/PropertyList/propertyAction';
-import {
-  Breadcrumb,
-  Button,
-  Table,
-  Input,
-} from 'antd';
+import { Breadcrumb, Button, Table, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Logout from '@/Components/Logout';
 import debounce from 'lodash.debounce';
-import { AdvancePropertyFilter } from '@/Components/AdvancePropertyFilter';
+import { AdvancePropertyFilterRedux } from '@/Components/AdvancePropertyFilterRedux';
 function propertyList() {
   const accessToken = useSelector(
     (state) => state?.reducer?.user?.data?.accessToken
@@ -114,54 +109,50 @@ function propertyList() {
     setSearch(e?.target?.value);
   }, 2000);
 
-  return (
-    <>
-      <div className="ant-table-property">
-        <div className="property-navbar">
-          <Breadcrumb
-            items={[
-              { title: <Link href="/welcome">Home</Link> },
-              { title: <Link href="/propertyList">Property</Link> },
-            ]}
-          ></Breadcrumb>
-          <div className="logout">
-            <Logout />
-          </div>
-        </div>
-        <div className="ant-search-div">
-          <Input
-            placeholder="Search by property,entity and company name"
-            allowClear
-            // enterButton="Search"
-            onChange={handleSearchQuery}
-            className="custom-ant-search"
-          />
-          <AdvancePropertyFilter />
-        </div>
-        <div className="ant-table">
-          <Table
-            dataSource={data}
-            columns={columns}
-            pagination={false}
-            className="table"
-          ></Table>
-          {/* <Pagination defaultCurrent={1} total={50} /> */}
-        </div>
-
-        <div className="load-more">
-          <p className="load-more-text">Showing {propertyList?.length}</p>
-          <Button
-            className="load-more-btn"
-            onClick={handleLoadMore}
-            loading={loading}
-          >
-            <strong className="btn-text"> Load {3} More</strong>
-          </Button>
-          <p className="load-more-text">Total {dataCount}</p>
+  return <>
+    <div className="ant-table-property">
+      <div className="property-navbar">
+        <Breadcrumb
+          items={[
+            { title: <Link href="/welcome">Home</Link> },
+            { title: <Link href="/propertyList">Property</Link> },
+          ]}
+        ></Breadcrumb>
+        <div className="logout">
+          <Logout />
         </div>
       </div>
-    </>
-  );
+      <div className="ant-search-div">
+        <Input
+          placeholder="Search by property,entity and company name"
+          allowClear
+          onChange={handleSearchQuery}
+          className="custom-ant-search"
+        />
+        <AdvancePropertyFilterRedux />
+      </div>
+      <div className="ant-table">
+        <Table
+          dataSource={data}
+          columns={columns}
+          pagination={false}
+          className="table"
+        ></Table>
+      </div>
+
+      <div className="load-more">
+        <p className="load-more-text">Showing {propertyList?.length}</p>
+        <Button
+          className="load-more-btn"
+          onClick={handleLoadMore}
+          loading={loading}
+        >
+          <strong className="btn-text"> Load {3} More</strong>
+        </Button>
+        <p className="load-more-text">Total {dataCount}</p>
+      </div>
+    </div>
+  </>;
 }
 
 export default propertyList;
