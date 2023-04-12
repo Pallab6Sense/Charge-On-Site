@@ -92,7 +92,7 @@ export const AdvancePropertyFilterRedux = () => {
     );
   };
   const customCloseIcon = (
-    <div style={{ position: 'absolute', top: 12, right: 12 }}>
+    <div style={{ position: 'absolute', top: 20, right: 12 }}>
       <CloseOutlined onClick={onClose} />
     </div>
   );
