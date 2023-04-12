@@ -3,6 +3,7 @@ import { Button, Drawer, Select } from 'antd';
 import debounce from 'lodash.debounce';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { CloseOutlined } from '@ant-design/icons';
 
 export const AdvancePropertyFilterRedux = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -33,6 +34,7 @@ export const AdvancePropertyFilterRedux = () => {
   const totalDataCount =
     state?.reducer?.company?.companyData?.count?.scannedCount;
 
+  const status = state?.reducer?.company?.status;
   const loadMore = () => {
     if (pageSize > totalDataCount) {
       return;
@@ -89,19 +91,24 @@ export const AdvancePropertyFilterRedux = () => {
       fetchCompanies({ accessToken, searchText, pageSize, currentPage })
     );
   };
-
+  const customCloseIcon = (
+    <div style={{ position: 'absolute', top: 12, right: 12 }}>
+      <CloseOutlined onClick={onClose} />
+    </div>
+  );
   return (
     <div>
       <Button className="load-more-btn" onClick={showDrawer}>
         Add Advance Filter
       </Button>
       <Drawer
-        title="Basic Drawer"
+        title="Advanced Filter"
         placement="right"
         onClose={onClose}
         open={drawerOpen}
         width={800}
         className="advance-filter-drawer"
+        closeIcon={customCloseIcon}
       >
         <div className="property-info">
           <p>Company</p>
@@ -112,7 +119,7 @@ export const AdvancePropertyFilterRedux = () => {
             style={{ width: '85%' }}
             onSearch={handleSearch}
             onPopupScroll={handleScroll}
-            loading={isLoading}
+            loading={status}
             onClear={handleOnClear}
             onChange={handleOnchange}
             maxTagCount={3}
