@@ -3,15 +3,19 @@
 import {
   fetchProperties,
   getCurrent,
-  getSearchQuery,
 } from '@/Redux/PropertyList/propertyAction';
-import { Breadcrumb, Button, Table, Input } from 'antd';
+import {
+  Breadcrumb,
+  Button,
+  Table,
+  Input,
+} from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Logout from '@/Components/Logout';
 import debounce from 'lodash.debounce';
-const { Search } = Input;
+import { AdvancePropertyFilter } from '@/Components/AdvancePropertyFilter';
 function propertyList() {
   const accessToken = useSelector(
     (state) => state?.reducer?.user?.data?.accessToken
@@ -22,8 +26,8 @@ function propertyList() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProperties(accessToken));
-  }, [accessToken, dispatch, current]);
+    dispatch(fetchProperties({ accessToken, search }));
+  }, [accessToken, dispatch, current, search]);
 
   const state = useSelector((state) => state);
   let propertyList = state?.reducer?.property?.propertyData?.data;
@@ -105,15 +109,9 @@ function propertyList() {
       },
     },
   ];
-  let sendSearchQuery = getSearchQuery;
+
   const handleSearchQuery = debounce((e) => {
     setSearch(e?.target?.value);
-    sendSearchQuery(search);
-  }, 1000);
-  sendSearchQuery(search);
-
-  const onSearch = debounce(() => {
-    dispatch(fetchProperties(accessToken));
   }, 2000);
 
   return (
@@ -131,17 +129,14 @@ function propertyList() {
           </div>
         </div>
         <div className="ant-search-div">
-          <Search
+          <Input
             placeholder="Search by property,entity and company name"
             allowClear
-            enterButton="Search"
+            // enterButton="Search"
             onChange={handleSearchQuery}
-            onSearch={onSearch}
             className="custom-ant-search"
           />
-          <p style={{ color: '#969696', fontSize: '14px', marginTop: '10px' }}>
-            Showing Properties: {propertyList?.length}
-          </p>
+          <AdvancePropertyFilter />
         </div>
         <div className="ant-table">
           <Table
@@ -150,6 +145,7 @@ function propertyList() {
             pagination={false}
             className="table"
           ></Table>
+          {/* <Pagination defaultCurrent={1} total={50} /> */}
         </div>
 
         <div className="load-more">
