@@ -107,7 +107,7 @@ function propertyList() {
 
   const handleSearchQuery = debounce((e) => {
     setSearch(e?.target?.value);
-  }, 2000);
+  }, 1000);
 
   return <>
     <div className="ant-table-property">
