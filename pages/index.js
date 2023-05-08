@@ -10,7 +10,7 @@ export default function Home() {
       <link rel="icon" href="https://static.wixstatic.com/media/182a81_c4e4ee2bac6d4389a866239475519bdf~mv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/182a81_c4e4ee2bac6d4389a866239475519bdf~mv2.png" />
     </Head>
     <div className="container">
-      <LoginForm />
+      <LoginForm></LoginForm>
     </div>
-  </>
+  </>;
 }
